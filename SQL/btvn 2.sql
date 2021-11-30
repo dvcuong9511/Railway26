@@ -22,6 +22,7 @@ CREATE TABLE Department (
    ('ban hang');
    SELECT * FROM Department;
 
+
 -- CREATE TABLE: position
 CREATE TABLE Position (
 	PositionID 				TINYINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
@@ -36,6 +37,7 @@ VALUE   ('Dev'             ),
 SELECT * FROM Position;
 
 -- CREATE TABLE: account
+DROP TABLE IF EXISTS `Account`;
 CREATE TABLE `Account` (
 	AccountID 				TINYINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     Email 					VARCHAR(50) UNIQUE KEY,
@@ -46,18 +48,20 @@ CREATE TABLE `Account` (
     CreateDate 				DATE,
      FOREIGN KEY (DepartmentID) REFERENCES department (DepartmentID),
      FOREIGN KEY (PositionID) REFERENCES position (PositionID)
+     
+     
     );
     INSERT INTO `Account` (Email,Username,FullName,DepartmentID,PositionID,CreateDate)
-    VALUES ('hu1@gmail.com','huong','thu huong','2','3','2012-02-12'),
-           ('hu2@gmail.com','hoang','huy hoang','2','4','2012-03-12'),
-           ('hu3@gmail.com','hung','huy hung','1','2','2012-01-11'),
-           ('hu4@gmail.com','huynh','van huynh','3','4','2012-03-01'),
-           ('hu5@gmail.com','hu','van hu','4','2','2013-01-01'),
-           ('hoa1@gmail.com','hoa','thuy hoa','5','2','2013-03-01'),
-           ('hoa12@gmail.com','hoan','le hoan','6','3','2014-03-01'),
-           ('hoa2@gmail.com','linh','thuy linh','5','2','2014-04-01'),
-           ('ho12@gmail.com','mai','thuy mai','2','4','2013-05-01'),
-           ('ho1@gmail.com','anh','ngoc anh','7','1','2012-03-06');
+    VALUES ('hu1@gmail.com','nguyen thu huong','thu huong','2','3','2012-02-12'),
+           ('hu2@gmail.com','dao huy hoang','huy hoang','2','4','2012-03-12'),
+           ('hu3@gmail.com','nguyen dac hung','huy hung','1','2','2012-01-11'),
+           ('hu4@gmail.com','le van huynh','van huynh','3','4','2012-03-01'),
+           ('hu5@gmail.com','hoang van hu','van hu','4','2','2013-01-01'),
+           ('hoa1@gmail.com','tran thi hoa','thuy hoa','1','2','2013-03-01'),
+           ('hoa12@gmail.com','le van hoan','le hoan','6','3','2014-03-01'),
+           ('hoa2@gmail.com','hoang thuy linh','thuy linh','3','2','2014-04-01'),
+           ('ho12@gmail.com','ho thuy mai','thuy mai','2','4','2013-05-01'),
+           ('ho1@gmail.com','dao ngoc anh','ngoc anh','2','1','2012-03-06');
 SELECT * FROM  `Account`;
 
 -- CREATE TABLE: group
@@ -131,13 +135,15 @@ SELECT * FROM TypeQuestion;
 SELECT * FROM CategoryQuestion;
     
     -- CREATE TABLE: Question
+    DROP TABLE IF EXISTS Question;
     CREATE TABLE Question (
 		QuestionID 			TINYINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
         Content 			VARCHAR(50) UNIQUE KEY,
         CategoryID 			TINYINT UNSIGNED,
         TypeID 				TINYINT UNSIGNED,
         CreatorID 			TINYINT UNSIGNED UNIQUE KEY,
-        CreateDate 			DATE
+        CreateDate 			DATE,
+        FOREIGN KEY (CreatorID) REFERENCES `account`(AccountID)
 	);
 INSERT INTO Question (Content,CategoryID,TypeID,CreatorID,CreateDate)
 VALUES ('asd','1','2','3','2012-02-01'),
@@ -153,6 +159,7 @@ VALUES ('asd','1','2','3','2012-02-01'),
 SELECT * FROM Question;
     
     -- CREATE TABLE: Answer
+    DROP TABLE IF EXISTS Answer;
     CREATE TABLE Answer (
 		AnswerID 			TINYINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
         Content 			VARCHAR(50),
@@ -162,11 +169,11 @@ SELECT * FROM Question;
     );
 INSERT INTO Answer (Content,QuestionID,isCorrect)
 VALUES ('xcv','2','dung'),
-       ('fgh','1','dung'),
-       ('jhk','3','sai'),
+       ('hgfgh','1','dung'),
+       ('ajhk','3','sai'),
        ('dfg','2','dung'),
        ('ghj','4','sai'),
-       ('mjk','3','sai'),
+       ('mjasdk','3','sai'),
        ('chj','6','sai'),
        ('trg','4','dung'),
        ('oij','7','dung'),
@@ -214,6 +221,8 @@ VALUES ('1','2'),
        ('8','5'),
        ('4','8');
         SELECT * FROM ExamQuestion;
+        
+        
   
    
    
